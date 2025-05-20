@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script type = "text/babel">
+    function Btn(props){    //여기서도 {fontSize = 16}등으로 기본값 줄 수 있음
+        return (<button style = {{
+            backgroundColor:"tomato",
+            color:"white",
+            padding : "10px 20px",
+            border : 0,
+            borderRadius : 10,
+            fontSize : props.big ? 25:15
+        }}
+        onClick={props.onClick}
+        >
+        {props.text} 
+        </button>
+        );  //style도 하나의 property. style안에 다른 속성들 넣는 실수x
+    }
+    function ConfirmBtn(){
+        return <button>Confirm</button>
+    }
+    const MemorizedBtn = React.memo(Btn)
+    Btn.propTypes={
+        text:PropTypes.string.isRequired, //무조건 fontSize라는 속성을 요구하게 됨
+        fontSize:PropTypes.number
+
+    }   //prop의 속성들이 어떤 타입이어야 하는지 지정해줌
+    function App(){
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
+        return (<div>
+            <MemorizedBtn text = {value} big = {true} onClick={changeValue}/>
+            <MemorizedBtn text = "Continue"/>
+            </div>
+            );  
+            //Btn에 들어가는 property들은 죄다 해당함수 인자로 들어감(argument : props), 한 개밖에 없음 => 오브젝트 인자
+            //ex) banana : key, "Save Changes" : value
+            //Btn({banana})이렇게 쓰면 props오브젝트의 banana가 자동으로 나옴(이미 props 오브젝트의 멤버여서)
+            //위 banana에서 텍스트에다가 {banana}라고 쓰면 해당 텍스트value 표시됨. props로 인자 넣을거면 {props.banana}
+
+            //MemorizedBtn(memo)의 기능 => props의 변경이 없다면 굳이 렌더링을 또 안해도 되게끔 해줌
+                //첫 번째 버튼은 클릭시 state에서 value가 변하지만 두 번째 버튼은 변하지 않으므로 리렌더링x
+
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App/>,root);
+</script>
+</html>

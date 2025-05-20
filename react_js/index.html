@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Js beginner</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type = "text/babel">
+    const root = document.getElementById("root");
+    function Title() { 
+        return (<h3 
+    id = "title" onMouseEnter={()=>console.log("mouse enter!")} >"Hello I'm a span"
+    </h3>)}   //JSX
+    // const H3 = React.createElement("h3",    // '태그, 속성(property), 텍스트'
+    // {
+    //     id:"title",
+    //     style:{
+    //         color:"red",
+    //     },
+    //     onMouseEnter:()=>console.log("mouse enter!")    //mouseEnter은 그냥 mouse커서가 위에 올라왔다는 뜻
+    // }, 
+    // "Hello I'm a span");
+    const Button = () => (   
+        // 함수 = () => ()를 통해서
+        //'함수 + return 형태'로 만들어주기 (밑에 Container에서 써먹기 위해)
+        <button style = {
+        {backgroundColor:"tomato",}
+    }
+        //기본적으로 property = {}구조이기 때문에 style에는 중괄호가 두번 들어가는 것.
+     onClick={()=>console.log("im clicked")}>Click me</button>
+    )
+        //여기선 onClick이 property인거임
+    const btn = React.createElement("button",
+    {   
+        style:{
+            backgroundColor:"tomato"
+        },
+        onClick:()=>console.log("im clicked"),  //바닐라에서의 button.addeventlistner 역할
+    },
+    "Click me!!");
+    const div = React.createElement("div",null,[Title,Button]);
+
+
+    //위의 JSX방식들을 rendering하는 법
+    const Container0 = () => (
+        <div> 
+        <Title/>
+        <Button/>   
+        </div>)  //<Title/>, <Button/> => 함수의 반환 값(태그값)들을 가지고 옴
+
+    //ReactDOM.render(<Container0/>, root);
+    //Babel을 쓰면 JSX가 아닌 그냥 ReactJS의 문법이 나온다(const H3 주석처리 되어있는 것과 const btn이 그 예시)
+    
+    let counter=0;
+    function countUp(){
+        counter+=1;
+        reRender();
+    }
+
+    function reRender(){
+        ReactDOM.render(<Container/>, root);
+    }
+
+    const Container = () => (
+        <div> 
+            <h3>Total clicks: {counter}</h3>
+            <button onClick={countUp}>Click me</button>
+        </div>)  //버튼에 이벤트리스너 연결(property)
+
+    function App(){
+        const data = React.useState(0);  //React에서 정말 많은 걸 제공
+        const [counter,modifier] = React.useState(0);   
+        //=> counter, modifier에 Array인 React.useState의 원소들 각각 대입
+        //counter은 0, modifier은 f
+
+        // const counter = data[0];
+        // const modifier=data[1];
+        console.log(data);
+        const onClick = () => {
+            //modifier(counter+1);  //스테이트[0]을 counter+1값으로 바꿔줌 + 자동리렌더링
+            modifier(current=>current+1);   //현재의 스테이트(current)에서 +1
+
+            //=> 1. 직접 값 전달하기 / 2. 함수인자로 전달하기
+        };
+        return (
+        <div> 
+            <h3>Total clicks: {counter}</h3> 
+            <button onClick = {onClick}>Click me</button>
+        </div>)  
+    }   //[0,f] => 초기값 0, 이 0을 f라는 함수에 적용시킬 수 있음 => data는 array형태로 받는 것
+
+
+    ReactDOM.render(<Container/>, root);
+    ReactDOM.render(<App/>,root);
+    //한번 렌더링하고 끝(일종의 새로고침) => so 버튼 클릭 시 counter값의 변경은 리렌더링작업이 필요
+    //=> function countUp에 추가 
+ 
+    
+</script>
+</html>

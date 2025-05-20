@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <!-- <script src="./dom.js"></script> -->
+</head>
+<body>
+    <h1 id = "brand-title" onclick = "alert('Hey!');">
+        <!-- onclick은 클릭 시, alert는 이벤트 발생시 실행되는 함수, hey는 텍스트  -->
+        <!-- on + 이벤트타입 -->
+        <!-- dom.js 실행 -->
+        <a href="#">모두를 위한 코딩 강의 - 테킷</a>
+    </h1>
+
+    <h2 class = 'sub-title'>멋쟁이사자처럼 스쿨</h2>
+    <p><a id = 'what the' href = "#">멋쟁이사자처럼 </a>스쿨이<br>여러분을 환영합니다.</p>
+    <script src="./dom.js"></script>
+    <!-- script를 무조건 head에서 먼저 실행시키면 DOM의 목적 이행 어려움 (h1 id를 불러와야되는데 그 전에 script를 실행시키는 것이기 때문에) -->
+</body>
+</html>

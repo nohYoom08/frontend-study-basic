@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Js beginner - Converter</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type = "text/babel">
+    const root = document.getElementById("root");
+
+   
+    function MinutetoHour(){
+
+        const [amount,setAmount]=React.useState(0);   //"State"생성
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+            console.log(event.target.value);  
+            //event라는 argument받아서 target멤버함수 활용 
+            //=> 가짜이벤트(event) 콘솔에 띄움 => event.target.value => 키보드로 입력받은 값
+            setAmount(event.target.value); //초기값인 minutes 업데이트(minutes = event.target.value)
+        };
+        const reset=()=>setAmount(0);  //setMinutes(0) 리턴함
+        const onFlip = () => {
+            setFlipped((current)=>!current);  //현재 flipped상태의 반대를 반환(current변수 활용)
+            reset() //flip과 동시에 reset
+        }
+        return (
+        <div> 
+            <label for = "minutes">Minutes</label>
+            <input value = {flipped ? amount * 60 : amount}   //value : 초기값 => 'state[0] = 0'
+            id = "minutes" placeholder = "Minutes" type = "number"
+            onChange={onChange}
+            disabled={flipped}/> 
+            
+            <h4>You want to convert {amount}</h4>
+
+            <label for = "hours">Hours</label>
+            <input value = {flipped ? amount : Math.round(amount/60)} 
+            id = "minutes" placeholder = "Minutes" type = "number"
+            onChange={onChange}
+            disabled={!flipped}/>
+            <br></br>
+            <button onClick={reset}>Reset</button>
+            <button onClick={onFlip}>{flipped ? "Flipped o" : "Flipped x"}</button>
+        </div>)  
+        //onChange함수 리스닝 => 입력(input)과 동시에 함수 실행
+        //disabled : 입력은 못하도록
+
+    }   //jsx에서는 class가 아닌 className, for이 아닌 htmlFor이라고 써야함. JavaScript와 언어 혼용 조심
+    function KilotoMile(){
+
+        const [amount, setAmount] = React.useState(0);   //"State"생성
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+            console.log(event.target.value);
+            //event라는 argument받아서 target멤버함수 활용 
+            //=> 가짜이벤트(event) 콘솔에 띄움 => event.target.value => 키보드로 입력받은 값
+            setAmount(event.target.value); //초기값인 minutes 업데이트(minutes = event.target.value)
+        };
+        const reset = () => setAmount(0);  //setMinutes(0) 리턴함
+        const onFlip = () => {
+            setFlipped((current) => !current);  //현재 flipped상태의 반대를 반환(current변수 활용)
+            reset() //flip과 동시에 reset
+        }
+        return (
+            <div>
+                <label for="kilometers">Kilometers</label>
+                <input value={flipped ? amount * 1.6 : amount}   //value : 초기값설정 => 'state[0] = 0'
+                    id="kilometers" placeholder="Kilometers" type="number"
+                    onChange={onChange}
+                    disabled={flipped} />
+
+                <h4>You want to convert {amount}</h4>
+
+                <label for="miles">Miles</label>
+                <input value={flipped ? amount : amount*0.6}
+                    id="miles" placeholder="Miles" type="number"
+                    onChange={onChange}
+                    disabled={!flipped} />
+                <br></br>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>{flipped ? "Flipped o" : "Flipped x"}</button>
+            </div>)
+        //onChange함수 리스닝 => 입력(input)과 동시에 함수 실행
+        //disabled : 입력은 못하도록
+
+    }   //jsx에서는 class가 아닌 className, for이 아닌 htmlFor이라고 써야함. JavaScript와 언어 혼용 조심
+    function App() {
+        const [index, setIndex] = React.useState("x");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return (    //select태그 참고
+            <div>
+                <h1>Super Converter</h1>
+                <select value = {index} onChange={onSelect}>
+                    <option value = "x">Select your units</option>    
+                    <option value = "0">Minutes & Hours</option>
+                    <option value = "1">Km & Miles </option>
+                </select>
+                
+                <br></br>
+                {index === "x" ? "Please select your units" : null}
+                {index === "0" ? <MinutetoHour/> : null}
+                {index === "1" ? <KilotoMile/> : null}
+            </div>  
+            //select-option : 셀렉트바와 그 선택지들
+            //option의 value는 사용자가 어떤 메뉴를 선택했는 지 알 수 있음(console.log를 하든)
+            // + 중괄호 여부 => javascript 안에다 넣을 수 있음
+            // 단순 ""따옴표 => 텍스트 화면에 표시
+            // onClick => 클릭 시 변화 / onChange => 단순 해당태그에 변화가 있을 때(선택이든 키보드 입력이든)
+        )
+    }
+    ReactDOM.render(<App/>,root);
+
+ 
+    
+</script>
+</html>

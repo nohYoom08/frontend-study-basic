@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum</title>
+    <link rel="stylesheet" href="css/style.css">
+   
+</head>
+<body>
+    <form id="login-form">
+        <input
+        required
+        maxlength="15" 
+        type="text"
+        placeholder="What is your name?">
+        <!-- input태그에 조건 달기 -->
+        <button>Log In</button>
+    </form>
+
+    <form>
+        <a href="https://www.naver.com">Go to Naver</a>
+    </form>
+
+    <h1 id="greeting" class="hidden"></h1>
+    <h2 id="clock">00:00:00</h2>
+    <div id="quote">
+        <span></span>
+        <span></span>
+    </div>
+
+    <form id = "todo-form">
+        <input type="text" placeholder="Write a To Do and Press Enter" required>
+        <!-- required의 의미 => 반드시 입력란에 내용이 들어가 있어야 함 -->
+    </form>
+    <ul id="todo-list">
+        <!-- <button>X</button> -->
+        <!-- X가 써져있는 버튼 생성 -->
+    </ul>
+    <div id="weather">
+        <span></span>
+        <span></span>
+    </div>
+    <script src="js/weather.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/quote.js"></script>
+    <script src="js/app.js"></script>  <!--script js는 코드 위로 적용(실수로 밑에 코딩하는 짓x)-->
+    
+</body>
+</html>

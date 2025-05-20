@@ -1,0 +1,102 @@
+/*
+body{
+    background-color: red;
+}
+img{
+    width:100%;
+    height:100%
+}*/
+html,body{
+    width:100%;
+    height:100%;
+}
+/*배경에 이미지 100퍼센트 채우고싶으면 부모요소들에도 100% 맥여야함(당연)*/
+/*화면 전체에 이미지 딱 맞게 들어감. 스크롤도 안 생김*/
+.bx-viewport, .bx-wrapper, .slider{
+    width:100%;
+    height:100%;
+}
+.background__01{
+    width:100%;
+    height:100%;
+    background:url("../%ED%95%9C%EA%B8%80/UEFA%20Chelsea%202012.jpg") no-repeat;
+    background-size:cover;
+    background-position:center;
+/*    center없으면 이미지의 왼쪽부분부터 채워짐*/
+/*    딱 저 위에가 background 속성 순서*/
+    
+}
+.background__02{
+    width:100%;
+    height:100%;
+    background:url("../images/a.jpg") no-repeat;
+    background-size:cover;
+    background-position:center;
+}
+.background__03{
+    width:100%;
+    height:100%;
+    background:url("../images/b.jpg") no-repeat;
+    background-size:cover;
+    background-position:center;
+}
+/*화면 전체에 꽉차는 이미지가 3개 => 스크롤 당연히 생김*/
+
+.overlay{
+    width:100%;
+    height:100%;
+    background:url("../images/16.png");
+    position:absolute;
+/*    페이지 맨 위를 기준으로 포지션 결정. 이러면 아래 요소가 덮어쓰게 됨*/
+    top:0;
+    z-index:10;
+/*    z축으로 10만큼 올라옴. 화면 앞뒤쪽의 위치성분임*/
+}
+.contents{ /*화면 정중앙 배치하는 법*/
+    position:absolute;
+    top:50%;
+    left:50%;
+/*    부모요소에서 시작점 위치 지정(absolute)*/
+    margin-left:-226px;
+    margin-top:-109px;
+/*    배치하고싶은 요소의 높이의 1/2를 top에서 빼고 넓이의 1/2를 left에서 뺌 => 가운데 정렬 완료*/
+    color:white;
+    z-index:20;
+    font-weight:bold;
+    text-align:center;
+    
+}
+.contents__name{
+    font-size:64px;
+    font-weight:bold;
+    color:white;
+    margin-bottom:25px;
+}
+.contents__job{
+    font-size:25px;
+    font-weight:bold;
+    color:white;
+    margin-bottom:50px;
+}
+.contents__list{
+    font-size:0;
+/*    기본공백의 기준인 폰트의 크기를 아예 0으로 만들어버리면 개행문자 공백 사라짐*/
+}
+.contents__list > li{
+    display:inline-block;
+    width:52px;
+    height:52px;
+    line-height: 52px;
+    border:1px solid white;
+    border-radius:50%;
+    text-align:center;
+    font-size:16px;
+    margin-right:20px;
+}
+.contents__list>li:last-child{
+    margin-right:0px;
+}
+.contents__list>li>a{
+    color:inherit;
+/*    부모가 가지고 있는 색깔 상속 -> 방문한 적이 있어도 안 바뀜*/
+}
